@@ -1,5 +1,10 @@
 import "./App.css";
+import Accordion from "./component/Accordion";
 
-function App() {}
+function App() {
+  return(
+    <Accordion/>
+  )
+}
 
 export default App;
