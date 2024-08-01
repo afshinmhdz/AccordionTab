@@ -22,34 +22,58 @@ function Accordion() {
   return (
     <div className="accordion">
       {data.map((item) => (
-        <AccordionItem key={item.id} item={item} open={open} setOpen={setOpen}/>
+        <AccordionItem
+          key={item.id}
+          id={item.id}
+          title={item.title}
+          open={open}
+          setOpen={setOpen}
+        >
+            {item.text}
+        </AccordionItem>
+        
       ))}
+      <AccordionItem
+          id="4"
+          title={"Another Accordion"}
+          open={open}
+          setOpen={setOpen}
+        >
+            <ul>
+                <li>
+                    I
+                </li>
+                <li>
+                    II
+                </li>
+                <li>
+                    III
+                </li>
+            </ul>
+        </AccordionItem>
     </div>
   );
 }
 
 export default Accordion;
 
-function AccordionItem({ item,setOpen,open,children }) {
-
-const isOpen=item.id===open ? true : false ;
+function AccordionItem({ id,title, setOpen, open, children }) {
+  const isOpen = id === open ? true : false;
 
   return (
     <div className={`accordion-item ${isOpen ? "accordion__expanded" : ""}`}>
-      <div
-        className="accordion-item__header"
-        onClick={() => setOpen(item.id)}
-      >
-        <div>{item.title}</div>
-        <ChevronDownIcon className="accordion-item__chevron"
-        //   style={{
-        //     width: "1.2rem",
-        //     transition: "all 0.2s ease-out",
-        //     rotate: isOpen ? "180deg" : "0deg",
-        //   }}
+      <div className="accordion-item__header" onClick={() => setOpen(id===open ? null : id)}>
+        <div>{title}</div>
+        <ChevronDownIcon
+          className="accordion-item__chevron"
+          //   style={{
+          //     width: "1.2rem",
+          //     transition: "all 0.2s ease-out",
+          //     rotate: isOpen ? "180deg" : "0deg",
+          //   }}
         />
       </div>
-      <div className="accordion-item__content">{item.text}</div>
+      <div className="accordion-item__content">{children}</div>
     </div>
   );
 }
